@@ -1,0 +1,29 @@
+<h4>文件详情 - {{file?.originName}}</h4>
+<div style="margin-bottom: 10px;">
+    <button (click)="showPreview = true;">查看内容</button> 
+    <button (click)="downloadFile()">下载文件</button> 
+    
+    上传时间：{{file?.uploadTime}}
+</div>
+
+@if (showPreview) {
+    <div>
+        @if (['txt'].indexOf(fileType) !== -1) {
+            <div>
+                <app-text-content-preview [fileId]="file!.id"></app-text-content-preview>
+            </div>
+        } @else if (['png', 'jpg', 'jpeg'].indexOf(fileType) !== -1) {
+            <div style="max-height: 380px;">
+                <img [src]="previewUrl">
+            </div>
+        } @else if (['pdf'].indexOf(fileType) !== -1) {
+            <div style="height: 380px;">
+                <iframe style="width: 100%; height: 380px;" [src]="previewUrl"></iframe>
+            </div>
+        } @else {
+            <div>
+                不支持预览的文件类型
+            </div>
+        }
+    </div>
+}

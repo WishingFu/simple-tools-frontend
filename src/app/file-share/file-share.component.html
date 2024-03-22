@@ -1,0 +1,10 @@
+<h4>文件列表</h4>
+<button>上传</button><button (click)="deleteFiles()">删除</button>
+<div class="file-list">
+    @for (file of fileList; track $index) {
+        <div class="file-link">
+            <input #fileSelect name="fileSelect" type="checkbox" (change)="checkList[file.originName] = fileSelect.checked" [(checked)]="checkList[file.originName]">
+            {{$index + 1}}.<a routerLink="preview/{{file.id}}" [state]="file">{{file.originName}}</a>
+        </div>
+    }
+</div>
